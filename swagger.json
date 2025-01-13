@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Library Management API",
+    "description": "API documentation for Library Management system",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/book/borrow": {
+      "post": {
+        "summary": "Borrow a book",
+        "description": "Endpoint to borrow a book",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "name 1"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "email@gmail.com"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "The Great Gatsby"
+                  }
+                },
+                "required": ["name", "email", "title"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book borrowed successfully"
+          }
+        }
+      }
+    },
+    "/book/borrowed": {
+      "get": {
+        "summary": "Get borrowed books by email",
+        "description": "Retrieve the books borrowed by a specific user",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "email@gmail.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of borrowed books"
+          }
+        }
+      }
+    },
+    "/book/all-borrowed": {
+      "get": {
+        "summary": "Get all borrowed books",
+        "description": "Retrieve a list of all borrowed books",
+        "responses": {
+          "200": {
+            "description": "List of all borrowed books"
+          }
+        }
+      }
+    },
+    "/book/return": {
+      "post": {
+        "summary": "Return a book",
+        "description": "Endpoint to return a borrowed book",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "email@gmail.com"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "The Great Gatsby"
+                  }
+                },
+                "required": ["email", "title"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book returned successfully"
+          }
+        }
+      }
+    },
+    "/book/extend": {
+      "post": {
+        "summary": "Extend a book loan",
+        "description": "Endpoint to extend the borrowing period of a book",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "email@gmail.com"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "The Great Gatsby"
+                  }
+                },
+                "required": ["email", "title"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Book loan extended successfully"
+          }
+        }
+      }
+    }
+  }
+}
